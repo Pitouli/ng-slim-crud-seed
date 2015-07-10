@@ -119,6 +119,16 @@ module.exports = function ( grunt ) {
           }
        ]   
       },
+      build_api: {
+        files: [
+          { 
+            src: [ '<%= app_files.api %>' ],
+            dest: '<%= build_dir %>/api/',
+            cwd: 'src/api',
+            expand: true
+          }
+       ]   
+      },
       build_appjs: {
         files: [
           {
@@ -161,6 +171,12 @@ module.exports = function ( grunt ) {
             src: [ '<%= vendor_files.css %>' ],
             dest: '<%= compile_dir %>/',
             cwd: '.',
+            expand: true
+          },
+          { 
+            src: [ '<%= app_files.api %>' ],
+            dest: '<%= compile_dir %>/api/',
+            cwd: 'src/api',
             expand: true
           }
         ]
@@ -569,7 +585,7 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
-    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
+    'concat:build_css', 'copy:build_app_assets', 'copy:build_api', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
     'karma:continuous' 
   ]);
