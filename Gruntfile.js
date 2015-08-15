@@ -119,12 +119,12 @@ module.exports = function ( grunt ) {
           }
        ]   
       },
-      build_api: {
+      build_server_files_php: {
         files: [
           { 
-            src: [ '<%= app_files.api %>' ],
-            dest: '<%= build_dir %>/api/',
-            cwd: 'src/api',
+            src: [ '<%= server_files.php %>' ],
+            dest: '<%= build_dir %>',
+            cwd: 'src',
             expand: true
           }
        ]   
@@ -174,9 +174,9 @@ module.exports = function ( grunt ) {
             expand: true
           },
           { 
-            src: [ '<%= app_files.api %>' ],
-            dest: '<%= compile_dir %>/api/',
-            cwd: 'src/api',
+            src: [ '<%= server_files.php %>' ],
+            dest: '<%= compile_dir %>',
+            cwd: 'src',
             expand: true
           }
         ]
@@ -507,6 +507,17 @@ module.exports = function ( grunt ) {
       },
 
       /**
+       * When api files are changed, copy them. Note that this will *not* copy new
+       * files, so this is probably not very useful.
+       */
+      api: {
+        files: [ 
+          'src/**/*.php', 'src/**/.htaccess'
+        ],
+        tasks: [ 'copy:build_server_files_php' ]
+      },
+
+      /**
        * When index.html changes, we need to compile it.
        */
       html: {
@@ -585,7 +596,7 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
-    'concat:build_css', 'copy:build_app_assets', 'copy:build_api', 'copy:build_vendor_assets',
+    'concat:build_css', 'copy:build_app_assets', 'copy:build_server_files_php', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_vendorcss', 'index:build', 'karmaconfig',
     'karma:continuous' 
   ]);

@@ -30,9 +30,11 @@ module.exports = {
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
     html: [ 'src/index.html' ],
-    less: 'src/less/main.less',
-	
-	api: [ '**/*.php', '**/.htaccess' ]
+    less: 'src/less/main.less'
+  },
+  
+  server_files: {
+	php: [ '**/*.php', '**/.htaccess' ]
   },
 
   /**

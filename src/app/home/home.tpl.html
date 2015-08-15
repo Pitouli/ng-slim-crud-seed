@@ -1,10 +1,13 @@
 <div class="jumbotron">
   <h1>Non-Trivial AngularJS Made Easy</h1>
+  
+  <h2>Hello {{user.name}} (id: {{searchId}})</h2>
 
   <p class="lead">
     Everything you need to kickstart AngularJS projects: a best-practice
     directory structure, an intelligent build system, and the best web design
     libraries around.
+	<input type="text" name="searchId" ng-model="searchId" ng-change="getUser(searchId)" />
   </p>
 
   <ul class="list-inline social-buttons">
